@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - "ch\xE3o"
+  - moeda
+  - chao
   layers:
   - Default
   - TransparentFX

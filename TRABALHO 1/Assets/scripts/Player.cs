@@ -8,18 +8,21 @@ public class Player : MonoBehaviour
     public int velocidade = 10;
     public int forcaPulo = 7;
     public bool noChao;
+
     private Rigidbody rb;
+    private AudioSource source;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("START");
         TryGetComponent(out rb);
+        TryGetComponent(out source);
         
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (!noChao && collision.gameObject.tag == "chão")
+        if (!noChao && collision.gameObject.tag == "chao")
         {
             noChao = true;
         }
@@ -39,9 +42,20 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space) && noChao)
         {
+            //pulo
+            source.Play();
+
+
             rb.AddForce(Vector3.up * forcaPulo,ForceMode.Impulse);
             noChao = false;
-        }    
+        } 
+
+
+        if (transform.position.y <= -10) 
+        {
+            //jogador caiu
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }  
 
 
 
